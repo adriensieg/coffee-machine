@@ -111,7 +111,8 @@ async def gemini_session_handler(client_websocket: websockets.WebSocketServerPro
 
 async def main() -> None:
     try:
-        async with websockets.serve(gemini_session_handler, "localhost", 9082):
+        # async with websockets.serve(gemini_session_handler, "localhost", 9082):
+        async with websockets.serve(gemini_session_handler, "0.0.0.0", 9082):
             logger.info("WebSocket server running on ws://localhost:9082")
             await asyncio.Future()
     except Exception as e:
