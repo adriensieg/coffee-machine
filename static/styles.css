@@ -1,0 +1,68 @@
+/* McDonald's Themed Styles */
+
+body {
+    background-color: white; /* Bright yellow background */
+    font-family: 'Roboto', sans-serif;
+    color: #d32f2f; /* McDonald's red for text */
+    margin: 0;
+    padding: 0;
+}
+
+.mdl-layout__header {
+    background-color: #d32f2f; /* McDonald's red */
+    color: white;
+}
+
+.mdl-layout-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.mdl-button--colored {
+    background-color: #d32f2f !important; /* McDonald's red buttons */
+    color: white !important;
+}
+
+.mdl-button {
+    border-radius: 50%;
+}
+
+.demo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.button-group {
+    margin-bottom: 20px;
+}
+
+#videoElement {
+    border: 5px solid #d32f2f; /* Red border for video */
+    border-radius: 10px;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+#canvasElement {
+    display: none; /* Hidden canvas */
+}
+
+#chatLog {
+    background-color: white;
+    color: #d32f2f;
+    border: 2px solid #d32f2f;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1rem;
+    overflow-y: auto;
+}
+
+.mdl-layout__content {
+    background-color: white; /* Match the page background */
+    padding: 20px;
+}
