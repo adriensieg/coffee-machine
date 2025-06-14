@@ -121,9 +121,19 @@ gcloud projects add-iam-policy-binding coffee-machine-maintenance --member="user
 
 ```
 gcloud beta builds connections create github github-connection --region=us-central1
+```
 
+![image](https://github.com/user-attachments/assets/a1d52c1c-87b8-4149-b2e3-52f9e77c7a3e)
 
+👉 Enable Secret Manager API. Wait 1–2 minutes after enabling.
+Then we have to grant `secretmanager.admin` to our Cloud Build service account `secretmanager.secrets.create` and `secretmanager.secrets.setIamPolicy` are both included in the `roles/secretmanager.admin` role, which is exactly what we want to assign to the Cloud Build service account (called a P4SA, or "Project-for-Service-Account").
+```
+gcloud projects add-iam-policy-binding coffee-machine-maintenance --member="serviceAccount:service-425761357703@gcp-sa-cloudbuild.iam.gserviceaccount.com" --role="roles/secretmanager.admin"
+```
+
+```
 gcloud beta builds connections list --region=us-central1
+```
 
 gcloud beta builds repositories create coffee-machine \
   --repository-format=github \
