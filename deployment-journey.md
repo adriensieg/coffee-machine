@@ -81,11 +81,55 @@ git push -u origin master --force
 ```
 
 
+# ✅ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run
+
+### Step 1: Grant Cloud Build permissions to deploy to Cloud Run
+
+#### How to get `[PROJECT_NUMBER]`?
+
+```
+gcloud projects describe coffee-machine-maintenance --format="value(projectNumber)"
+
+gcloud projects describe [PROJECT_ID] --format="value(projectNumber)"
+```
+
+```
+gcloud projects add-iam-policy-binding [PROJECT_ID] \
+  --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+  --role="roles/run.admin"
+
+gcloud projects add-iam-policy-binding [PROJECT_ID] \
+  --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
 
 
+gcloud projects add-iam-policy-binding [PROJECT_ID]
+```
 
 
+```
+gcloud projects add-iam-policy-binding coffee-machine-maintenance --member="serviceAccount:425761357703@cloudbuild.gserviceaccount.com" --role="roles/run.admin"
 
+gcloud projects add-iam-policy-binding coffee-machine-maintenance --member="serviceAccount:425761357703@cloudbuild.gserviceaccount.com" --role="roles/iam.serviceAccountUser"
+
+gcloud projects add-iam-policy-binding coffee-machine-maintenance --member="user:siegadrien@gmail.com" --role="roles/run.developer"
+```
+
+### Step 2: Create Cloud Build Trigger (manual one-time setup)
+
+- You can do this via the GCP Console under Cloud Build > Triggers, or via CLI:
+
+```
+gcloud beta builds triggers create github \
+  --name="build-and-deploy" \
+  --region=us-central1 \
+  --repo-name="[your-repo-name]" \
+  --repo-owner="[your-github-username]" \
+  --branch-pattern="^main$" \
+  --build-config="cloudbuild.yaml"
+
+gcloud beta builds triggers create github --name="build-and-deploy" --region=us-central1 --repo-name="coffee-machine" --repo-owner="adriensieg" --branch-pattern="^master$" --build-config="cloudbuild.yaml"
+```
 
 
 
