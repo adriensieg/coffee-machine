@@ -135,6 +135,21 @@ gcloud projects add-iam-policy-binding coffee-machine-maintenance --member="serv
 gcloud beta builds connections list --region=us-central1
 ```
 
+![image](https://github.com/user-attachments/assets/00d4429b-be88-4af3-be4e-7c4d4d29597f)
+
+- Go to https://console.cloud.google.com/cloud-build/connections?project=coffee-machine-maintenance
+- Click your connection name (github-connection)
+- Click "Install GitHub App"
+- Grant access to your GitHub repo (e.g. coffee-machine)
+- Complete the OAuth authorization
+
+![image](https://github.com/user-attachments/assets/cdd44781-7e5e-44ac-bbff-5a8222653c70)
+
+Then 
+![image](https://github.com/user-attachments/assets/a83a584b-6d5f-48b6-93d1-49bfd901fc5e)
+
+OR 
+```
 gcloud beta builds repositories create coffee-machine \
   --repository-format=github \
   --connection=projects/PROJECT_ID/locations/us-central1/connections/github-1 \
@@ -148,17 +163,21 @@ gcloud beta builds triggers create github \
   --repo-owner="[your-github-username]" \
   --branch-pattern="^main$" \
   --build-config="cloudbuild.yaml"
+```
+
+```
+gcloud beta builds repositories create coffee-machine --repository-format=github --connection=projects/coffee-machine-maintenance/locations/us-central1/connections/github-1 --remote-uri=https://github.com/adriensieg/coffee-machine --region=us-central1
 
 gcloud beta builds triggers create github --name="build-and-deploy" --region=us-central1 --repo-name="coffee-machine" --repo-owner="adriensieg" --branch-pattern="^master$" --build-config="cloudbuild.yaml"
+
+
+gcloud beta builds triggers create github --name="build-and-deploy" --region=us-central1 --repository="coffee-machine" --branch-pattern="^master$" --build-config="cloudbuild.yaml" --connection="projects/coffee-machine-maintenance/locations/us-central1/connections/github-connection"
+
 ```
 
 
 
 gcloud beta builds connections create github --region=us-central1 --github-owner=adriensieg --repository=coffee-machine --name=github-connection
-
-
-
-
 
 
 Create a Cloud Run Service (empty for now)
@@ -175,3 +194,115 @@ git pull origin master --rebase
 git add .
 git commit -m "Initial commit"
 git push -u origin master
+
+
+
+
+
+
+# Set up an HTTPS load balancer in front of your Cloud Run service
+
+### Set your project
+```
+gcloud config set project coffee-machine-maintenance
+```
+### Enable required APIs
+```
+gcloud services enable compute.googleapis.com
+gcloud services enable certificatemanager.googleapis.com
+```
+
+### 1. Reserve a static IP address
+```
+gcloud compute addresses create coffee-machine-lb-ip --global
+```
+
+###  Get the reserved IP (save this for DNS setup)
+```
+gcloud compute addresses describe coffee-machine-lb-ip --global --format="value(address)"
+```
+###  2. Create a Network Endpoint Group (NEG) for your Cloud Run service
+```
+gcloud compute network-endpoint-groups create coffee-machine-neg --region=us-central1 --network-endpoint-type=serverless --cloud-run-service=iap-protected-app-425761357703
+```
+
+###  3. Create a backend service
+```
+gcloud compute backend-services create coffee-machine-backend --global
+```
+
+###  4. Add the NEG to the backend service
+```
+gcloud compute backend-services add-backend coffee-machine-backend --global --network-endpoint-group=coffee-machine-neg --network-endpoint-group-region=us-central1
+```
+
+###  5. Create a URL map
+```
+gcloud compute url-maps create coffee-machine-url-map --default-service=coffee-machine-backend
+```
+
+###  6. Create a managed SSL certificate (replace YOUR_DOMAIN with your actual domain)
+You'll need to point your domain to the static IP before this certificate validates
+```
+gcloud compute ssl-certificates create coffee-machine-ssl-cert --domains=pretotype.live --global
+```
+
+#### Create a DNS Zone
+![image](https://github.com/user-attachments/assets/b46e3345-3b72-46ba-9bb4-86fb4d6c8ff5)
+
+#### Create a CNAME
+![image](https://github.com/user-attachments/assets/604271fa-d061-4dff-9a69-2b4b5625481c)
+
+#### Associate the DNS to the IP addres
+![image](https://github.com/user-attachments/assets/23b8ebed-878a-4065-b118-512b30fb7b34)
+
+#### Change the DNS in GoDaddy
+![image](https://github.com/user-attachments/assets/135b6650-76a3-4594-8b02-aa213262d311)
+
+![image](https://github.com/user-attachments/assets/01d06ebc-41b1-4017-871d-b2743db48794)
+
+# 7. Create an HTTPS proxy
+```
+gcloud compute target-https-proxies create coffee-machine-https-proxy --url-map=coffee-machine-url-map --ssl-certificates=coffee-machine-ssl-cert
+```
+
+# 8. Create a global forwarding rule for HTTPS (port 443)
+```
+gcloud compute forwarding-rules create coffee-machine-https-rule --global --target-https-proxy=coffee-machine-https-proxy --address=coffee-machine-lb-ip --ports=443
+```
+
+# Optional: Create HTTP to HTTPS redirect
+# 9a. Create HTTP URL map for redirect
+```
+gcloud compute url-maps create coffee-machine-http-redirect --default-url-redirect-response-code=301 --default-url-redirect-https-redirect
+```
+# 9b. Create HTTP proxy
+gcloud compute target-http-proxies create coffee-machine-http-proxy \
+    --url-map=coffee-machine-http-redirect
+
+# 9c. Create HTTP forwarding rule
+gcloud compute forwarding-rules create coffee-machine-http-rule \
+    --global \
+    --target-http-proxy=coffee-machine-http-proxy \
+    --address=coffee-machine-lb-ip \
+    --ports=80
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
