@@ -39,10 +39,9 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 - Replace `us-central1` with your desired region if different
 
-# ✅ Step 2: Push to GitHub
+# ❌ Step 2: Push to GitHub on different branches
 
 ```
-cd "1. Set Up"
 git init
 git remote add origin https://github.com/your-username/your-repo-name.git
 git add .
