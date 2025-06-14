@@ -202,6 +202,15 @@ git push -u origin master
 
 # Set up an HTTPS load balancer in front of your Cloud Run service
 
+Key Components to create: 
+- **Static IP**: coffee-machine-lb-ip - Your global static IP address
+- **Network Endpoint Group**: `coffee-machine-neg` - Points to your Cloud Run service
+- **Backend Service**: `coffee-machine-backend` - Routes traffic to your NEG
+- **URL Map**: `coffee-machine-url-map` - Defines routing rules
+- **SSL Certificate**: `coffee-machine-ssl-cert` - Managed SSL certificate
+- **HTTPS Proxy**: `coffee-machine-https-proxy` - Handles HTTPS traffic
+- **Forwarding Rules**: Routes traffic from the static IP to your service
+
 ### Set your project
 ```
 gcloud config set project coffee-machine-maintenance
@@ -261,26 +270,26 @@ gcloud compute ssl-certificates create coffee-machine-ssl-cert --domains=pretoty
 
 ![image](https://github.com/user-attachments/assets/01d06ebc-41b1-4017-871d-b2743db48794)
 
-# 7. Create an HTTPS proxy
+### 7. Create an HTTPS proxy
 ```
 gcloud compute target-https-proxies create coffee-machine-https-proxy --url-map=coffee-machine-url-map --ssl-certificates=coffee-machine-ssl-cert
 ```
 
-# 8. Create a global forwarding rule for HTTPS (port 443)
+### 8. Create a global forwarding rule for HTTPS (port 443)
 ```
 gcloud compute forwarding-rules create coffee-machine-https-rule --global --target-https-proxy=coffee-machine-https-proxy --address=coffee-machine-lb-ip --ports=443
 ```
 
-# Optional: Create HTTP to HTTPS redirect
-# 9a. Create HTTP URL map for redirect
+### Optional: Create HTTP to HTTPS redirect
+#### 9a. Create HTTP URL map for redirect
 ```
 gcloud compute url-maps create coffee-machine-http-redirect --default-url-redirect-response-code=301 --default-url-redirect-https-redirect
 ```
-# 9b. Create HTTP proxy
+#### 9b. Create HTTP proxy
 gcloud compute target-http-proxies create coffee-machine-http-proxy \
     --url-map=coffee-machine-http-redirect
 
-# 9c. Create HTTP forwarding rule
+#### 9c. Create HTTP forwarding rule
 gcloud compute forwarding-rules create coffee-machine-http-rule \
     --global \
     --target-http-proxy=coffee-machine-http-proxy \
@@ -288,10 +297,9 @@ gcloud compute forwarding-rules create coffee-machine-http-rule \
     --ports=80
 
 
+# Easily Fine-Tune Gemini Models (Google Cloud, No Code, for Cheap)
 
-
-
-
+https://www.youtube.com/watch?v=6UfFq7IvjVA
 
 
 
