@@ -120,6 +120,17 @@ gcloud projects add-iam-policy-binding coffee-machine-maintenance --member="user
 - You can do this via the GCP Console under Cloud Build > Triggers, or via CLI:
 
 ```
+gcloud beta builds connections create github github-connection --region=us-central1
+
+
+gcloud beta builds connections list --region=us-central1
+
+gcloud beta builds repositories create coffee-machine \
+  --repository-format=github \
+  --connection=projects/PROJECT_ID/locations/us-central1/connections/github-1 \
+  --remote-uri=https://github.com/adriensieg/coffee-machine \
+  --region=us-central1
+
 gcloud beta builds triggers create github \
   --name="build-and-deploy" \
   --region=us-central1 \
@@ -133,8 +144,7 @@ gcloud beta builds triggers create github --name="build-and-deploy" --region=us-
 
 
 
-
-
+gcloud beta builds connections create github --region=us-central1 --github-owner=adriensieg --repository=coffee-machine --name=github-connection
 
 
 
@@ -149,3 +159,9 @@ gcloud run deploy my-app \
     --region=us-central1 \
     --allow-unauthenticated \
     --no-traffic
+
+
+git pull origin master --rebase
+git add .
+git commit -m "Initial commit"
+git push -u origin master
