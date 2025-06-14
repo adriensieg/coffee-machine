@@ -81,7 +81,7 @@ git push -u origin master --force
 ```
 
 
-# ✅ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run
+# ❌ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run
 
 ### Step 1: Grant Cloud Build permissions to deploy to Cloud Run
 
@@ -200,7 +200,7 @@ git push -u origin master
 
 
 
-# Set up an HTTPS load balancer in front of your Cloud Run service
+# ✅ Step 4: Set up an HTTPS load balancer in front of your Cloud Run service
 
 Key Components to create: 
 - **Static IP**: coffee-machine-lb-ip - Your global static IP address
@@ -297,7 +297,7 @@ gcloud compute forwarding-rules create coffee-machine-http-rule \
     --ports=80
 
 
-# Easily Fine-Tune Gemini Models (Google Cloud, No Code, for Cheap)
+# ❌ Step 5: Easily Fine-Tune Gemini Models (Google Cloud, No Code, for Cheap)
 
 https://www.youtube.com/watch?v=6UfFq7IvjVA
 
