@@ -306,6 +306,7 @@ gcloud compute forwarding-rules create coffee-machine-http-rule \
 # ❌ Step 5: Easily Fine-Tune Gemini Models (Google Cloud, No Code, for Cheap)
 
 https://www.youtube.com/watch?v=6UfFq7IvjVA
+https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#vertex-ai-sdk-for-python_1
 
 # ❌ Step 6: Protect my app with Identity Aware Proxy
 
@@ -317,7 +318,6 @@ https://www.youtube.com/watch?v=6UfFq7IvjVA
 
 
 ![image](https://github.com/user-attachments/assets/1cb43548-5d09-48f6-a8a8-288857f23dbf)
-
 
 
 
