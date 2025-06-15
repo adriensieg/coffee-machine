@@ -300,6 +300,9 @@ gcloud compute forwarding-rules create coffee-machine-http-rule \
 
 ![image](https://github.com/user-attachments/assets/dd16ead6-d33a-4b0d-9731-e4ca250162b7)
 
+![image](https://github.com/user-attachments/assets/2449307e-3087-4c23-ae9f-96de5d68e18b)
+
+
 # ❌ Step 5: Easily Fine-Tune Gemini Models (Google Cloud, No Code, for Cheap)
 
 https://www.youtube.com/watch?v=6UfFq7IvjVA
