@@ -307,9 +307,9 @@ gcloud compute forwarding-rules create coffee-machine-http-rule \
 
 https://www.youtube.com/watch?v=6UfFq7IvjVA
 
+# ❌ Step 6: Protect my app with Identity Aware Proxy
 
-
-
+![image](https://github.com/user-attachments/assets/e3221c44-ec95-4894-8b80-288aaf745b11)
 
 
 
