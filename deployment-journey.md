@@ -279,6 +279,7 @@ gcloud compute target-https-proxies create coffee-machine-https-proxy --url-map=
 gcloud compute forwarding-rules create coffee-machine-https-rule --global --target-https-proxy=coffee-machine-https-proxy --address=coffee-machine-lb-ip --ports=443
 ```
 
+
 ### Optional: Create HTTP to HTTPS redirect
 #### 9a. Create HTTP URL map for redirect
 ```
@@ -295,6 +296,9 @@ gcloud compute forwarding-rules create coffee-machine-http-rule \
     --address=coffee-machine-lb-ip \
     --ports=80
 
+#### 🎯 At the end - I want to achieve that: 
+
+![image](https://github.com/user-attachments/assets/dd16ead6-d33a-4b0d-9731-e4ca250162b7)
 
 # ❌ Step 5: Easily Fine-Tune Gemini Models (Google Cloud, No Code, for Cheap)
 
