@@ -1,7 +1,7 @@
 # Deploy a fully functional multimodal application —powered by a fine-tuned Gemini model— on GCP
 
 
-- [✅ Step 1: Create a project, Authenticate and Set Up GCP CLI](#step1)
+- [✅ Step 1: Create a project, Authenticate and Set Up GCP CLI](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-1-create-a-project-authenticate-and-set-up-gcp-cli)
 - [❌ Step 2: Push to GitHub on different branches](#step2)
 - [❌ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run](#step3)
 
