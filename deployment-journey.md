@@ -1,4 +1,4 @@
-# Deploy a fully functional multimodal application—powered by a fine-tuned Gemini model—on GCP
+# Deploy a fully functional multimodal application —powered by a fine-tuned Gemini model— on GCP
 
 ## ✅ Step 1: Create a project, Authenticate and Set Up GCP CLI
 
