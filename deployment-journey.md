@@ -3,7 +3,10 @@
 
 - [✅ Step 1: Create a project, Authenticate and Set Up GCP CLI](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-1-create-a-project-authenticate-and-set-up-gcp-cli)
 - [❌ Step 2: Push to GitHub on different branches](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-2-push-to-github-on-different-branches)
-- [❌ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run](#step3)
+- [❌ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run](https://github.com/adriensieg/coffee-machine/edit/master/deployment-journey.md#-step-3-cicd-from-github--cloud-build--cloud-run)
+- [❌ Step 4: Set up an HTTPS load balancer in front of your Cloud Run service](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-4-set-up-an-https-load-balancer-in-front-of-your-cloud-run-service)
+- [❌ Step 5: Easily Fine-Tune Gemini Models (Google Cloud, No Code, for Cheap)](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-5-easily-fine-tune-gemini-models-google-cloud-no-code-for-cheap)
+- [❌ Step 6: Protect my app with Identity Aware Proxy](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-6-protect-my-app-with-identity-aware-proxy)
 
 
 ## ✅ Step 1: Create a project, Authenticate and Set Up GCP CLI
