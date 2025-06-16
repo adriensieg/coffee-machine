@@ -1,25 +1,38 @@
+# Deploy a fully functional multimodal application—powered by a fine-tuned Gemini model—on GCP
 
-# ✅ Step 1: Create a project, Authenticate and Set Up GCP CLI
+## ✅ Step 1: Create a project, Authenticate and Set Up GCP CLI
 
-### Create a project
-<img src="https://github.com/user-attachments/assets/2f393877-e428-4157-a723-224fef3b0495" width="80%" height="80%">
-
-### Authenticate and set your project
+### A. Authenticate
 ```
 gcloud auth login
 gcloud auth application-default login
 gcloud projects list                     # See your projects
+```
+### B. Create a project
+```
+gcloud projects create PROJECT_ID --name="PROJECT_NAME"
+```
+Replace:
+`PROJECT_ID` with a unique identifier (e.g., my-new-project-123)
+`PROJECT_NAME` with a human-readable name (e.g., "My New Project")
+
+Or use the Google Console:
+
+<img src="https://github.com/user-attachments/assets/2f393877-e428-4157-a723-224fef3b0495" width="80%" height="80%">
+
+### C. Set your project
+```
 gcloud config set project YOUR_PROJECT_ID
 
 gcloud config set project coffee-machine-maintenance  
 ```
 
-### Enable Required APIs
+### D. Enable Required APIs
 ```
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com containerregistry.googleapis.com iam.googleapis.com cloudresourcemanager.googleapis.com
 ```
 
-### Set Up Artifact/Container Registry
+### E. Set Up Artifact/Container Registry
 
 ```
 gcloud artifacts repositories create my-repo \
@@ -32,7 +45,7 @@ gcloud artifacts repositories create coffee-repo --repository-format=docker --lo
 
 <img src="https://github.com/user-attachments/assets/02f50640-e134-491a-9d48-cace8945e996" width="50%" height="50%">
 
-### Authenticate Docker to push to Artifact Registry:
+### F. Authenticate Docker to push to Artifact Registry:
 ```
 gcloud auth configure-docker us-central1-docker.pkg.dev
 ```
