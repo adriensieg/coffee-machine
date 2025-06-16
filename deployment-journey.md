@@ -2,7 +2,7 @@
 
 
 - [✅ Step 1: Create a project, Authenticate and Set Up GCP CLI](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-1-create-a-project-authenticate-and-set-up-gcp-cli)
-- [❌ Step 2: Push to GitHub on different branches](#step2)
+- [❌ Step 2: Push to GitHub on different branches](https://github.com/adriensieg/coffee-machine/blob/master/deployment-journey.md#-step-2-push-to-github-on-different-branches)
 - [❌ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run](#step3)
 
 
