@@ -1,5 +1,11 @@
 # Deploy a fully functional multimodal application —powered by a fine-tuned Gemini model— on GCP
 
+
+- [✅ Step 1: Create a project, Authenticate and Set Up GCP CLI](#step1)
+- [❌ Step 2: Push to GitHub on different branches](#step2)
+- [❌ Step 3: CI/CD from GitHub → Cloud Build → Cloud Run](#step3)
+
+
 ## ✅ Step 1: Create a project, Authenticate and Set Up GCP CLI
 
 ### A. Authenticate
@@ -52,7 +58,7 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 - Replace `us-central1` with your desired region if different
 
-# ❌ Step 2: Push to GitHub on different branches
+## ❌ Step 2: Push to GitHub on different branches
 
 ```
 git init
