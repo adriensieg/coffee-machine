@@ -332,6 +332,7 @@ https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervis
 
 # ❌ Step 6: Protect my app with Identity Aware Proxy
 
+https://jayendrapatil.com/google-cloud-identity-aware-proxy-iap/
 
 - **Phase 1**: Set up **OAuth Consent Screen**
   - Go to **APIs & Services** > **OAuth consent screen**
