@@ -332,6 +332,44 @@ https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervis
 
 # ❌ Step 6: Protect my app with Identity Aware Proxy
 
+
+- **Phase 1**: Set up **OAuth Consent Screen**
+  - Go to **APIs & Services** > **OAuth consent screen**
+  - Choose "Internal" (for organization) or **"External" (for testing)**
+  - Fill out required fields:
+    - **App name**: "IAP Protected App"
+    - **User support email**: your email
+    - **Developer contact**: your email
+  - Click "Save and Continue"
+ 
+![image](https://github.com/user-attachments/assets/3745248a-f7cf-471a-862f-6fb51f56931b)
+
+
+- **Phase 2**:Create **OAuth 2.0 Credentials**
+
+Go to APIs & Services > Credentials
+Click "Create Credentials" > "OAuth 2.0 Client IDs"
+Choose "Web application"
+Name it "IAP Client"
+Add Authorized redirect URIs:
+
+https://iap.googleapis.com/v1/oauth/clientIds/YOUR_CLIENT_ID:handleRedirect
+(You'll update this after getting the client ID)
+
+
+Click "Create"
+IMPORTANT: Copy the Client ID and Client Secret - you'll need them!
+
+![image](https://github.com/user-attachments/assets/89dd9ba9-790c-402a-918c-48a569620deb)
+
+Step 7: Configure Identity Aware Proxy
+
+Go to Security > Identity-Aware Proxy
+You should see your Cloud Run service listed
+Toggle the IAP switch to "ON" for your service
+When prompted, select the OAuth 2.0 client you just created
+Click "Turn On"
+
 ![image](https://github.com/user-attachments/assets/e3221c44-ec95-4894-8b80-288aaf745b11)
 
 
